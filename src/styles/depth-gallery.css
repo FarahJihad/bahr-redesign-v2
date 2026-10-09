@@ -1,0 +1,89 @@
+.mirage-work{position:relative;min-height:100svh;padding:110px 0 35px;background:radial-gradient(ellipse at 50% 90%,#173a4b,#050e18 68%);overflow:hidden;color:#edf7fb}
+.mirage-work-heading{display:flex;justify-content:space-between;margin:0 6vw 28px;font-size:10px;letter-spacing:2px;color:#9bb9c9}
+.mirage-project-stage{display:grid;grid-template-columns:10vw minmax(0,1fr) 10vw;gap:24px;align-items:center;min-height:58svh}
+.mirage-project{position:relative;display:block;height:58svh;min-height:330px;overflow:hidden;background:#102430;--pointer-x:50%;--pointer-y:50%;--image-x:0px;--image-y:0px;isolation:isolate}
+.mirage-project-image{width:100%;height:100%;object-fit:cover;object-position:center top;transform:scale(1.04) translate(var(--image-x),var(--image-y));transition:transform .65s cubic-bezier(.2,.7,.2,1),filter .65s;filter:brightness(.62) saturate(.75)}
+.mirage-project-shade{position:absolute;inset:0;background:linear-gradient(0deg,rgba(3,12,21,.7),transparent 60%),linear-gradient(90deg,rgba(2,12,22,.28),transparent)}
+.mirage-project-title{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:25px;pointer-events:none;transition:transform .6s}
+.mirage-project-title>span{font-size:10px;letter-spacing:3px;color:#d2e4ed}.mirage-project-title h2{font-family:'Space Grotesk',sans-serif;font-size:clamp(42px,6vw,90px);font-weight:700;letter-spacing:-.065em;line-height:1.05;margin:24px 0;text-shadow:0 3px 30px #0005}
+.mirage-project-invitation{margin-top:12px;border-bottom:1px solid #91b7c6;padding-bottom:10px}
+.mirage-side{position:relative;border:0;padding:0;height:48svh;min-height:270px;background:#0d2635;overflow:hidden;cursor:pointer;color:#fff}.mirage-side img{width:100%;height:100%;object-fit:cover;filter:brightness(.35);transition:filter .5s,transform .8s}.mirage-side span{position:absolute;inset:0;display:grid;place-items:center;font-size:32px}.mirage-side:hover img{filter:brightness(.65);transform:scale(1.05)}
+.mirage-work-controls{display:flex;justify-content:space-between;align-items:center;margin:28px 6vw 0;gap:20px}.mirage-work-controls button{background:none;border:0;color:#ecf8ff;cursor:pointer;padding:8px 0;text-align:left}.mirage-work-controls>button:last-child{text-align:right}.mirage-work-controls small{display:block;font-size:8px;letter-spacing:2px;color:#8dabbb;margin-bottom:10px}.mirage-work-controls strong{font-size:13px;font-weight:500}.mirage-work-controls nav{display:flex;gap:15px}.mirage-work-controls nav button{padding:15px 0}.mirage-work-controls nav span{display:block;width:34px;height:2px;background:#355262;transition:background .4s,width .4s}.mirage-work-controls [aria-current] span{background:var(--project-accent);width:65px}
+.mirage-project-cursor{position:absolute;left:var(--pointer-x);top:var(--pointer-y);transform:translate(-50%,-50%) scale(.7);width:100px;height:100px;border-radius:50%;background:#e8f7ef;color:#102632;display:flex;align-items:center;justify-content:center;text-align:center;font-size:10px;line-height:1.7;letter-spacing:1px;opacity:0;pointer-events:none;transition:opacity .25s,transform .35s;box-shadow:0 6px 35px #0003}
+@media(hover:hover) and (pointer:fine){.mirage-project:hover{cursor:none}.mirage-project:hover .mirage-project-cursor{opacity:1;transform:translate(-50%,-50%) scale(1)}.mirage-project:hover .mirage-project-image{filter:brightness(.85) saturate(1);transform:scale(1.08) translate(var(--image-x),var(--image-y))}.mirage-project:hover .mirage-project-title{transform:translateY(-8px)}}
+.from-right{animation:mirage-project-enter .75s cubic-bezier(.16,1,.3,1)}.from-left{animation:mirage-project-enter-left .75s cubic-bezier(.16,1,.3,1)}
+@keyframes mirage-project-enter{from{opacity:.2;clip-path:inset(0 0 0 100%);translate:25px 0}to{opacity:1;clip-path:inset(0);translate:0 0}}@keyframes mirage-project-enter-left{from{opacity:.2;clip-path:inset(0 100% 0 0);translate:-25px 0}to{opacity:1;clip-path:inset(0);translate:0 0}}
+@media(max-width:700px){.mirage-work{padding-top:105px;min-height:auto}.mirage-project-stage{grid-template-columns:4vw minmax(0,1fr) 4vw;gap:10px}.mirage-project{height:57svh}.mirage-side{height:45svh}.mirage-side span{font-size:18px}.mirage-project-title h2{font-size:42px}.mirage-project-title>span{font-size:8px;letter-spacing:1.6px}.mirage-work-controls strong{font-size:9px}.mirage-work-controls nav{gap:7px}.mirage-work-controls nav span{width:14px}.mirage-work-controls [aria-current] span{width:28px}}
+@media(prefers-reduced-motion:reduce){.from-left,.from-right{animation:none}.mirage-project-image,.mirage-project-title,.mirage-project-cursor{transition:none}}
+
+/* A held, scroll-directed exhibition with one project in focus. */
+.mirage-work{height:100svh;min-height:650px;box-sizing:border-box;--scroll-scale:1;--scroll-tilt:0deg;--scroll-lift:0px;--scroll-fade:1;perspective:1400px}
+.mirage-project-stage{transform:translateY(var(--scroll-lift)) rotateX(var(--scroll-tilt)) scale(var(--scroll-scale));opacity:var(--scroll-fade);transform-origin:50% 65%;will-change:transform,opacity}
+.work-scroll-track{height:1px;background:#ffffff18;margin:24px 6vw 0;overflow:hidden}.work-scroll-track span{display:block;height:100%;background:var(--project-accent);transform:scaleX(var(--work-progress,0));transform-origin:left}
+.mirage-work-controls{margin-top:15px}
+@media(max-width:700px){.mirage-work{min-height:580px}.mirage-project-stage{min-height:0}.mirage-project{min-height:260px;height:51svh}.mirage-side{min-height:220px;height:42svh}}
+@media(prefers-reduced-motion:reduce){.mirage-work{height:auto}.mirage-project-stage{transform:none;opacity:1}}
+
+/* Airier sea tones keep the portfolio readable after the dark opening. */
+.mirage-work{background:radial-gradient(ellipse at 55% 45%,#38758a 0%,#214d64 48%,#17394e 100%)}
+.mirage-project-image{filter:brightness(.88) saturate(.95)}
+.mirage-project-shade{background:linear-gradient(0deg,rgba(8,28,43,.5),transparent 65%),linear-gradient(90deg,rgba(8,28,43,.12),transparent)}
+.mirage-side img{filter:brightness(.68) saturate(.85)}
+.mirage-work-heading,.mirage-work-controls small{color:#c4dde7}
+.mirage-project-title h2{text-shadow:0 2px 20px #071d35aa}
+
+/* The dark service scene opens into the brighter portfolio. */
+.mirage-work{background:#081b28;--arrival-light:1}
+.mirage-work::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse at 55% 55%,#38758a 0%,#214d64 48%,#17394e 100%);opacity:var(--arrival-light);pointer-events:none}
+.work-arrival{position:relative;z-index:1;transform-origin:center 65%;will-change:transform,clip-path}
+@media(prefers-reduced-motion:reduce){.work-arrival{will-change:auto}}
+
+
+/* A small glass invitation follows the pointer without obscuring the project. */
+.mirage-project-cursor{width:92px;height:92px;gap:10px;flex-direction:column;background:linear-gradient(135deg,rgba(230,249,255,.2),rgba(230,249,255,.055));border:1px solid rgba(231,249,255,.65);color:#f3fbff;backdrop-filter:blur(12px) saturate(115%);-webkit-backdrop-filter:blur(12px) saturate(115%);box-shadow:inset 0 1px 0 #ffffff35,0 6px 24px #00132326;font-size:8px;font-weight:500;letter-spacing:1.1px;line-height:1.2}
+.mirage-project-cursor svg{width:21px;height:21px;flex:none}
+.mirage-project-cursor>span{white-space:nowrap}
+.mirage-project-stage{user-select:none;-webkit-user-select:none}.mirage-project-image{-webkit-user-drag:none}
+
+/* A final held chapter carries the portfolio into the invitation. */
+.mirage-work{--work-bridge:0}
+.mirage-work::after{content:'';position:absolute;inset:0;background:#0a202d;opacity:var(--work-bridge);pointer-events:none;z-index:1}
+.mirage-work-heading,.mirage-work-controls,.work-scroll-track{opacity:calc(1 - var(--work-bridge))}
+.work-next-chapter{position:absolute;inset:0;z-index:2;display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center;pointer-events:none;opacity:var(--work-bridge);transform:translateY(calc((1 - var(--work-bridge))*45px));padding:90px 7vw;box-sizing:border-box}
+.work-next-chapter>span{font-size:10px;letter-spacing:.22em;color:#94b8c9}
+.work-next-chapter p{font-family:'Space Grotesk',sans-serif;font-size:clamp(38px,6vw,88px);font-weight:500;line-height:1.12;letter-spacing:-.055em;margin:32px 0;color:#e4f1f5}
+.work-next-chapter em{font-style:normal;color:#99d4e6}
+@media(prefers-reduced-motion:reduce){.work-next-chapter{display:none}}
+
+.mirage-work .mirage-project-stage{opacity:clamp(0,calc(1 - var(--work-bridge)*2.5),1)}
+.work-next-chapter{opacity:clamp(0,calc((var(--work-bridge) - .4)*1.667),1)}
+.mirage-work .mirage-work-heading,.mirage-work .mirage-work-controls,.mirage-work .work-scroll-track{opacity:clamp(0,calc(1 - var(--work-bridge)*2.5),1)}
+
+.work-next-chapter{justify-content:flex-end;padding-bottom:65px}
+.work-next-chapter p{margin:22px 0}
+
+/* Keep the final invitation centered and fully clear of portfolio chrome. */
+.work-next-chapter{justify-content:center;padding:85px 7vw 65px}
+.mirage-work .mirage-work-heading,.mirage-work .mirage-work-controls,.mirage-work .work-scroll-track{opacity:clamp(0,calc(1 - var(--work-bridge)*4),1)!important}
+
+/* Let the project image lead, without an oversized cursor badge. */
+.mirage-project-cursor{display:none!important}
+.mirage-work .mirage-project{cursor:pointer}
+
+.work-next-chapter{display:none}
+
+.mirage-project-scope{display:block;font-size:11px!important;letter-spacing:.04em!important;color:#c2d9e4;margin:8px 0 18px;text-transform:none!important;line-height:1.5}
+.work-all-link{font-size:10px;letter-spacing:.12em;color:#c2dce8;border-bottom:1px solid #c2dce844;padding-bottom:6px}
+.work-all-link:hover{color:#fff;border-color:#fff}
+@media(max-width:700px){.mirage-project-scope{font-size:9px!important;max-width:230px;margin:7px auto 15px}.work-all-link{font-size:8px}}
+
+.mirage-project-title>span,.mirage-project-scope,.mirage-project-invitation{color:#e5f4fa!important;text-shadow:0 2px 7px #000,0 0 18px #000}
+.mirage-project-scope{font-size:12px;line-height:1.6}
+.mirage-project-invitation{font-size:11px;letter-spacing:.12em}
+.mirage-project-shade{background:linear-gradient(180deg,#020c1420,#020c1455 28%,#020c14bb 65%,#020c1488)}
+@media(max-width:700px){.mirage-project-scope{font-size:10px}.mirage-project-invitation{font-size:9px}}
+
+.mirage-work::after{background:#1b4659}
+
+.work-water-bridge{position:absolute;inset:0;z-index:2;pointer-events:none;opacity:var(--work-bridge,0)}
+.work-water-bridge .invitation-water{mask-image:radial-gradient(ellipse,#000 25%,transparent 82%)}
